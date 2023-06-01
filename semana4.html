@@ -11,6 +11,43 @@
 <!--
     
 -->
+<style>
+        
+    .container {
+        margin: 0 auto;
+        border: 5px solid rgb(43, 25, 163);
+        width: 80%;
+    }
+
+    .pelota {
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+        border: 2px solid rgb(163, 25, 25);
+        background: rgba(18, 69, 99, 0.373);
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .btn {
+        background-color: rgb(47, 102, 255);
+        border: none;
+        font-size: 20px;
+        padding: 20px;
+        cursor: pointer;
+        border-radius: 10%;
+    }
+
+    .btn:hover {
+        background-color: rgba(149, 0, 152, 0.388);
+    }
+    .button {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
 </head>
 <body>
     <!--  -->
@@ -65,7 +102,17 @@
         
         <div class="row tm-mb-90">            
             <div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
-                <img src="img/Desarrollo-Web-1288x724-1.jpg" alt="Image" class="img-fluid">
+                <div class="container">
+                    <div class="pelota" id="pelota"></div>
+                    <div class="button">
+                        <button class="btn" id="play">play</button>
+                        <button class="btn" id="pause">pause</button>
+                        <button class="btn" id="stop">stop</button>
+                        <button class="btn" id="reverse">reverse</button>
+                    </div>
+                </div>
+            
+                
             </div>
             <div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
                 <div class="tm-bg-gray tm-video-details">
@@ -109,5 +156,36 @@
             $('body').addClass('loaded');
         });
     </script>
+
+<script>
+    const pelota = document.getElementById("pelota");
+    const playBtn = document.getElementById("play");
+    const pauseBtn = document.getElementById("pause");
+    const reverseBtn = document.getElementById("reverse");
+
+    let reverse = false;
+    let animationDirection = 1; // animación inicial hacia la derecha
+
+    playBtn.addEventListener("click", () => {
+        pelota.style.animationPlayState = "running";
+    });
+
+    pauseBtn.addEventListener("click", () => {
+        pelota.style.animationPlayState = "paused";
+    });
+
+    reverseBtn.addEventListener("click", () => {
+        if (!reverse) {
+            animationDirection = -1; // cambiar la dirección a izquierda
+            reverse = true;
+        } else {
+            animationDirection = 1; // cambiar la dirección a derecha
+            reverse = false;
+        }
+        pelota.style.animationDirection = animationDirection === 1 ? "normal" : "reverse";
+        pelota.style.animationPlayState = "running";
+    });
+
+</script>
 </body>
 </html>
