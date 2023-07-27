@@ -5,11 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/953d7e04d5.js" crossorigin="anonymous"></script>
-    <title>Semana 1</title>
+    <title>Semana 9</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
     <link rel="stylesheet" href="css/templatemo-style.css">
+    <style>
+        /* Estilos para la navegación */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        /* Contenedor para el contenido dinámico */
+        #content {
+            margin-top: 20px;
+        }
+    </style>
     <!--
     
 -->
@@ -63,32 +81,38 @@
 
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row mb-4">
-            <h2 class="col-12 tm-text-primary">Semana 7</h2>
+            <h2 class="col-12 tm-text-primary">Semana 9</h2>
         </div>
 
         <div class="row tm-mb-90">
-            <div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
-                <img style="width: 580px;" src="img/react-local.PNG" alt="">
-                <img style="width: 370px;" src="img/vite-local.PNG" alt="">
-                <img src="img/next.PNG" alt="">
+            <div style="display: flex; flex-direction: column; background-image: linear-gradient(to right, rgb(217, 135, 135), rgb(54, 175, 68)); justify-content: center; align-items: center;" class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
+
+                <h1>Router en HTML</h1>
+
+                <ul>
+                    <li><a href="#/">Inicio</a></li>
+                    <li><a href="#/pagina1">Página 1</a></li>
+                    <li><a href="#/pagina2">Página 2</a></li>
+                </ul>
+
+                <div id="content">
+                    <!-- Aquí se cargará el contenido dinámico -->
+                </div>
             </div>
             <div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
                 <div class="tm-bg-gray tm-video-details">
                     <p class="mb-4">
-                    <h2>Frameworks</h2>
+                    <h2>React router</h2>
                     </p>
                     <div class="mb-4">
-                        <h3>React</h3>
-                        <p>React es una biblioteca de JavaScript para construir interfaces de usuario interactivas y
-                            reactivas. Permite crear componentes reutilizables que gestionan su propio estado y se
-                            combinan para formar interfaces de usuario más grandes.</p>
-                        <h3>Vite</h3>
-                        <p>Vite es un marco de construcción web ultrarrápido y ligero que se centra en el desarrollo de
-                            aplicaciones frontend modernas. Fue creado por Evan You, el creador de Vue.js, pero también
-                            es compatible con otros frameworks como React y Preact.</p>
-                        <h3>Next</h3>
-                        <p>Next.js es un marco de trabajo de React para el desarrollo de aplicaciones web del lado del
-                            servidor (SSR - Server-Side Rendering) y del lado del cliente (CSR - Client-Side Rendering).
+                        <p>React Router DOM es una biblioteca de enrutamiento para aplicaciones web construidas con
+                            React.js. Proporciona una manera sencilla y efectiva de manejar la navegación y la
+                            visualización de diferentes componentes en una aplicación de página única (SPA).
+
+                            En una SPA, la navegación tradicional a través de URL causa una recarga de página completa,
+                            lo que no es deseable para una experiencia de usuario fluida. Aquí es donde entra React
+                            Router DOM, ya que permite cambiar de manera dinámica el contenido de la página sin
+                            necesidad de recargarla.
                         </p>
                     </div>
                 </div>
@@ -100,7 +124,7 @@
             <div class="container-fluid tm-container-small">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-12 px-5 mb-5">
-                        <h3 class="tm-text-primary mb-4 tm-footer-title">Semana 1 Portafolio</h3>
+                        <h3 class="tm-text-primary mb-4 tm-footer-title">Semana 9 Portafolio</h3>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et rem nesciunt nemo dolorum
                             corrupti harum sed dignissimos veritatis unde eligendi.</p>
                     </div>
@@ -125,6 +149,47 @@
             $(window).on("load", function () {
                 $('body').addClass('loaded');
             });
+
+            // Función para obtener el fragmento de la URL después del símbolo de # (hash)
+            function getFragment() {
+                return window.location.hash.slice(1);
+            }
+
+            // Función para cargar el contenido de la página según la ruta
+            function loadContent(fragment) {
+                var contentDiv = document.getElementById('content');
+                var content = '';
+
+                // Determinar qué contenido cargar según la ruta
+                switch (fragment) {
+                    case 'pagina1':
+                        content = '<h2>Página 1</h2><p>¡Bienvenido a la página 1!</p>';
+                        break;
+                    case 'pagina2':
+                        content = '<h2>Página 2</h2><p>¡Esta es la página 2!</p>';
+                        break;
+                    default:
+                        content = '<h2>Inicio</h2><p>¡Bienvenido! Esta es la página de inicio.</p>';
+                        break;
+                }
+
+                // Actualizar el contenido en el div
+                contentDiv.innerHTML = content;
+            }
+
+            // Función para manejar los cambios de la URL
+            function handleHashChange() {
+                var fragment = getFragment();
+                loadContent(fragment);
+            }
+
+            // Asignar el evento onhashchange para detectar cambios en la URL
+            window.onhashchange = handleHashChange;
+
+            // Cargar el contenido inicial basado en la URL actual
+            handleHashChange();
+
+
         </script>
 </body>
 
